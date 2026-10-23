@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090b12">
+<title>TITAN AI TRADING | غرفة الذكاء الاصطناعي</title>
+<style>
+:root{--bg:#080a11;--panel:#111521;--panel2:#151b29;--line:#262e40;--text:#f2f5fc;--muted:#8f9ab0;--cyan:#4ce4e8;--purple:#9a7bff;--gold:#e9c778;--green:#42d6a0;--red:#ff647c;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1a2440 0,transparent 36%),radial-gradient(ellipse at 0% 45%,#17112d 0,transparent 30%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:22px 15px;border-left:1px solid var(--line);background:rgba(9,12,20,.88);backdrop-filter:blur(16px);display:flex;flex-direction:column;gap:20px;z-index:10}.brand{display:flex;align-items:center;gap:11px;padding:3px 8px 17px;border-bottom:1px solid var(--line)}.brand-mark{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,var(--cyan),var(--purple));display:grid;place-items:center;color:#080b12;font-weight:900;font-size:21px;box-shadow:0 0 30px #4ce4e82a}.brand h1{font-size:16px;letter-spacing:1px;margin:0}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:5px;letter-spacing:1.5px}.side-label{font-size:10px;color:#69758c;letter-spacing:1.3px;padding:0 12px}.nav{display:grid;gap:6px}.nav button{display:flex;align-items:center;gap:12px;border:1px solid transparent;border-radius:12px;padding:12px 13px;background:transparent;color:#aab4c8;text-align:right;transition:.2s}.nav button:hover,.nav button.active{color:var(--text);background:linear-gradient(100deg,#252a42,#171d2d);border-color:#343c56}.nav button.active .nav-icon{color:var(--cyan)}.nav-icon{width:22px;text-align:center;font-size:17px}.sidebar-bottom{margin-top:auto}.status-card{border:1px solid #2c3a4c;background:#111a25;border-radius:14px;padding:13px;font-size:11px;color:var(--muted)}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px #42d6a0;margin-left:7px}.status-row{display:flex;justify-content:space-between;margin-top:10px}.main{min-width:0;padding:25px clamp(14px,2.5vw,34px) 50px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:25px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}.page-title{font-size:clamp(22px,3vw,30px);margin:7px 0 0;font-weight:800}.top-actions{display:flex;align-items:center;gap:9px}.icon-btn,.secondary-btn,.primary-btn{border:1px solid var(--line);background:#151a28;color:var(--text);padding:10px 13px;border-radius:11px}.icon-btn{width:42px;height:42px;padding:0}.primary-btn{background:linear-gradient(110deg,#4ce4e8,#8c82ff);border:0;color:#080b12;font-weight:800}.secondary-btn:hover,.icon-btn:hover{border-color:#586783}.demo-pill{border:1px solid #715c2c;background:#2b2416;color:var(--gold);font-size:11px;border-radius:999px;padding:8px 12px;white-space:nowrap}.view{display:none;animation:fade .25s ease}.view.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border:1px solid #30354e;border-radius:24px;padding:clamp(20px,3vw,34px);background:linear-gradient(112deg,rgba(23,30,49,.97),rgba(14,16,29,.95) 65%,rgba(48,31,72,.8));margin-bottom:20px;min-height:220px}.hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;border:1px solid #8e83ff26;box-shadow:0 0 0 30px #8e83ff0b,0 0 0 60px #8e83ff08;left:8%;top:-100px;pointer-events:none}.hero-content{position:relative;z-index:1;max-width:670px}.hero h2{font-size:clamp(24px,3vw,36px);line-height:1.4;margin:9px 0 10px}.hero p{color:#aab4c8;line-height:1.9;font-size:13px;max-width:610px;margin:0 0 19px}.hero-actions{display:flex;gap:9px;flex-wrap:wrap}.hero-tag{display:inline-flex;align-items:center;gap:7px;border:1px solid #3c4a61;background:#111a28aa;padding:7px 10px;border-radius:8px;color:#b7c6da;font-size:11px}.grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:linear-gradient(145deg,rgba(20,25,39,.96),rgba(14,18,29,.96));border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-width:0}.stat-label{color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:6px}.stat-value{font-size:clamp(20px,2.3vw,27px);font-weight:800;margin:13px 0 8px;direction:ltr;text-align:right;white-space:nowrap}.stat-foot{font-size:10px;color:var(--muted)}.up{color:var(--green)}.down{color:var(--red)}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:25px 0 13px}.section-head h3{margin:0;font-size:16px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:11px}.link-btn{border:0;background:transparent;color:var(--cyan);font-size:11px}.characters{grid-template-columns:repeat(4,minmax(0,1fr))}.character{position:relative;overflow:hidden;text-align:center;padding:0;min-height:205px;background:linear-gradient(160deg,#1c2638,#111521 75%);cursor:pointer;transition:.25s}.character:hover{transform:translateY(-3px);border-color:#555e7d}.character-art{height:112px;display:grid;place-items:center;position:relative;background:radial-gradient(ellipse at center,#414b7033,transparent 65%)}.avatar{width:76px;height:76px;border-radius:26px;display:grid;place-items:center;font-size:39px;border:1px solid #ffffff28;box-shadow:0 12px 35px #0006;transform:rotate(-4deg)}.a1{background:linear-gradient(145deg,#4a8792,#27305a)}.a2{background:linear-gradient(145deg,#7754a7,#253f64)}.a3{background:linear-gradient(145deg,#a67845,#4b3249)}.a4{background:linear-gradient(145deg,#4b9a86,#293456)}.character h4{margin:2px 0 5px;font-size:13px}.character p{margin:0;color:var(--muted);font-size:10px;line-height:1.7;padding:0 10px 14px}.online{position:absolute;top:13px;right:13px;font-size:9px;color:var(--green)}.online:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor;margin-left:5px}.cols{grid-template-columns:minmax(0,1.55fr) minmax(280px,1fr)}.chart-card{padding:17px}.chart-toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.pair-select{background:#0e1320;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px}.timeframes{display:flex;gap:4px}.timeframes button{border:0;background:transparent;color:var(--muted);padding:7px 9px;border-radius:7px;font-size:10px}.timeframes button.active{background:#293149;color:var(--cyan)}.chart-wrap{height:260px;position:relative;margin-top:15px}.chart-wrap canvas{width:100%;height:100%;display:block}.chart-legend{display:flex;gap:15px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin-top:10px}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:5px}.signal{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #252c3b}.signal:last-child{border:0}.signal-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:11px;background:#242b40;color:var(--cyan);flex-shrink:0}.signal h4{font-size:12px;margin:1px 0 6px}.signal p{font-size:10px;line-height:1.7;color:var(--muted);margin:0}.signal .time{font-size:10px;color:#66738b;margin-right:auto;white-space:nowrap}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:11px}th{text-align:right;color:#7e8aa1;font-weight:500;border-bottom:1px solid var(--line);padding:12px 10px}td{padding:14px 10px;border-bottom:1px solid #222a39}tr:last-child td{border-bottom:0}.badge{display:inline-block;padding:5px 8px;border-radius:7px;font-size:10px}.badge.green{color:var(--green);background:#17372f}.badge.red{color:var(--red);background:#3c202c}.badge.gold{color:var(--gold);background:#332b1b}.badge.blue{color:var(--cyan);background:#173239}.notice{border:1px solid #54462c;background:#251f16;color:#d8c89e;border-radius:12px;padding:12px 14px;font-size:11px;line-height:1.8;margin-bottom:16px}.notice strong{color:#f2d48c}.calendar-list{display:grid;gap:10px}.event{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:12px;background:#101521}.event-time{font-size:11px;color:var(--cyan);direction:ltr;text-align:right}.event h4{font-size:12px;margin:0 0 5px}.event p{font-size:10px;color:var(--muted);margin:0}.impact{width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:6px}.high{background:var(--red);box-shadow:0 0 10px #ff647c55}.medium{background:var(--gold)}.low{background:var(--green)}.strategy-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.strategy-card h4{margin:0 0 8px;font-size:14px}.strategy-card p{color:var(--muted);font-size:11px;line-height:1.8;min-height:55px}.strategy-meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.switch{position:relative;display:inline-block;width:38px;height:21px;flex-shrink:0}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;inset:0;background:#353d50;border-radius:20px;transition:.2s}.slider:before{content:"";position:absolute;height:15px;width:15px;right:3px;top:3px;background:white;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:#328e8e}.switch input:checked+.slider:before{transform:translateX(-17px)}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border-bottom:0}.setting-row strong{display:block;font-size:12px;margin-bottom:5px}.setting-row small{font-size:10px;color:var(--muted);line-height:1.7}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:11px;color:#a9b4c8}.field input,.field select{width:100%;background:#0b101a;border:1px solid #30384b;border-radius:10px;color:var(--text);padding:12px;outline:none}.field input:focus,.field select:focus{border-color:var(--cyan)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.form-actions{display:flex;gap:9px;flex-wrap:wrap}.empty{color:var(--muted);font-size:12px;text-align:center;padding:25px}.footer-note{font-size:10px;line-height:1.8;color:#68758c;margin-top:20px}.toast{position:fixed;bottom:22px;left:22px;z-index:50;background:#172436;border:1px solid #3b5870;color:#e8f8ff;border-radius:12px;padding:13px 17px;font-size:12px;box-shadow:0 12px 40px #0008;opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s;max-width:calc(100vw - 35px)}.toast.show{opacity:1;transform:none}.modal-backdrop{position:fixed;inset:0;background:#03050bd9;backdrop-filter:blur(7px);display:none;place-items:center;z-index:40;padding:18px}.modal-backdrop.show{display:grid}.modal{width:min(520px,100%);background:#111725;border:1px solid #3b435a;border-radius:20px;padding:23px;box-shadow:0 25px 90px #000b}.modal h3{margin:0 0 8px}.modal p{color:var(--muted);font-size:12px;line-height:1.8}.modal-actions{display:flex;gap:9px;justify-content:flex-start;margin-top:20px}.mobile-menu{display:none}
+@media(max-width:1100px){.app{grid-template-columns:210px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.characters{grid-template-columns:repeat(2,minmax(0,1fr))}.strategy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cols{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:720px){.app{display:block}.sidebar{position:fixed;right:-270px;top:0;width:250px;transition:right .25s;box-shadow:-20px 0 60px #0007}.sidebar.open{right:0}.main{padding:17px 12px 85px}.topbar{align-items:flex-start}.page-title{font-size:22px}.top-actions .demo-pill{display:none}.mobile-menu{display:inline-grid;place-items:center}.hero{padding:21px 18px}.hero h2{font-size:25px}.stats{gap:9px}.stats .card{padding:13px}.stat-value{font-size:21px}.characters{gap:9px}.character{min-height:195px}.strategy-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.event{grid-template-columns:61px minmax(0,1fr) auto;padding:11px;gap:8px}.chart-wrap{height:230px}.section-head{margin-top:20px}.top-actions{gap:6px}.top-actions .secondary-btn{padding:9px}.brand{padding-top:12px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brand-mark">T</div><div><h1>TITAN AI</h1><small>TRADING INTELLIGENCE</small></div></div>
+  <div class="side-label">مركز القيادة</div>
+  <nav class="nav" id="nav">
+    <button class="active" data-view="home"><span class="nav-icon">⌂</span>غرفة الذكاء الاصطناعي</button>
+    <button data-view="market"><span class="nav-icon">◈</span>السوق المباشر</button>
+    <button data-view="strategies"><span class="nav-icon">⌘</span>الاستراتيجيات</button>
+    <button data-view="calendar"><span class="nav-icon">◷</span>الأخبار الاقتصادية</button>
+    <button data-view="risk"><span class="nav-icon">⛨</span>إدارة المخاطر</button>
+    <button data-view="history"><span class="nav-icon">▤</span>سجل الصفقات</button>
+    <button data-view="accounts"><span class="nav-icon">◎</span>الحسابات والربط</button>
+    <button data-view="settings"><span class="nav-icon">⚙</span>الإعدادات</button>
+  </nav>
+  <div class="sidebar-bottom status-card">
+    <div><span class="status-dot"></span>الواجهة تعمل محلياً</div>
+    <div class="status-row"><span>بيانات السوق</span><span class="badge gold">عرض تجريبي</span></div>
+    <div class="status-row"><span>اتصال الوسيط</span><span>غير مربوط</span></div>
+    <div class="status-row"><span>محرك التداول</span><span>متوقف</span></div>
+  </div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="icon-btn mobile-menu" id="menuBtn" aria-label="فتح القائمة">☰</button>
+      <div><div class="eyebrow">INTELLIGENCE ROOM / 01</div><h1 class="page-title" id="pageTitle">غرفة الذكاء الاصطناعي</h1></div>
+    </div>
+    <div class="top-actions"><span class="demo-pill">● وضع العرض التجريبي</span><button class="icon-btn" id="notifyBtn" title="التنبيهات">♧</button><button class="secondary-btn" data-goto="accounts">ربط حساب +</button></div>
+  </header>
+
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-tag">✦ نظام تحليل متعدد الوكلاء <span style="color:var(--green)">● جاهز للعرض</span></div>
+        <h2>أربع عقول. رؤية واحدة.<br><span style="color:var(--cyan)">قرارات مبنية على البيانات.</span></h2>
+        <p>غرفة قيادة تجمع التحليل الفني، قراءة الرسوم، البحث الاقتصادي ومراجعة الاستراتيجيات. هذه النسخة واجهة تفاعلية ببيانات توضيحية، ولا تتصل بوسيط أو تنفّذ صفقات حقيقية حتى يتم إعداد الخادم والتكامل.</p>
+        <div class="hero-actions"><button class="primary-btn" data-goto="market">افتح لوحة السوق ↗</button><button class="secondary-btn" data-goto="strategies">استكشف الاستراتيجيات</button><span class="hero-tag">◷ مراقبة 24/7 بعد إعداد الخادم</span></div>
+      </div>
+    </div>
+    <div class="grid stats">
+      <div class="card"><div class="stat-label">رصيد توضيحي <span>◉</span></div><div class="stat-value">$10,000.00</div><div class="stat-foot">ليس رصيد حساب متصل</div></div>
+      <div class="card"><div class="stat-label">صافي اليوم <span>↗</span></div><div class="stat-value up">+$124.80</div><div class="stat-foot">بيانات واجهة تجريبية فقط</div></div>
+      <div class="card"><div class="stat-label">الصفقات المفتوحة <span>⌁</span></div><div class="stat-value">02</div><div class="stat-foot">أمثلة غير منفذة</div></div>
+      <div class="card"><div class="stat-label">السحب الأقصى <span>⛨</span></div><div class="stat-value">2.4%</div><div class="stat-foot">قيمة توضيحية لا تمثل أداءً فعلياً</div></div>
+    </div>
+    <div class="section-head"><div><h3>فريق التحليل الاصطناعي</h3><p>اختر شخصية لعرض اختصاصها ومخرجاتها.</p></div><span class="badge blue">4 وكلاء</span></div>
+    <div class="grid characters">
+      <article class="card character" data-agent="analyst"><span class="online">متاحة</span><div class="character-art"><div class="avatar a1">🧑🏻‍💻</div></div><h4>ليان · المحللة</h4><p>الاتجاهات، بنية السوق، مناطق الدعم والمقاومة.</p></article>
+      <article class="card character" data-agent="chart"><span class="online">متاحة</span><div class="character-art"><div class="avatar a2">👩🏽‍🎨</div></div><h4>آدم · رسام الشارت</h4><p>الرسوم، المؤشرات، مستويات الدخول والإبطال.</p></article>
+      <article class="card character" data-agent="writer"><span class="online">متاحة</span><div class="character-art"><div class="avatar a3">👨🏻‍📚</div></div><h4>نور · الباحثة</h4><p>ملخص الأخبار، سجل القرارات، التقارير.</p></article>
+      <article class="card character" data-agent="brain"><span class="online">متاحة</span><div class="character-art"><div class="avatar a4">🧠</div></div><h4>تيتان · العقل المفكر</h4><p>مقارنة الإشارات، جودة الفرص، إدارة المخاطر.</p></article>
+    </div>
+    <div class="section-head"><div><h3>نظرة السوق</h3><p>الرسم التالي مولّد محلياً لأغراض العرض فقط.</p></div><button class="link-btn" data-goto="market">فتح التحليل الكامل ←</button></div>
+    <div class="grid cols">
+      <div class="card chart-card">
+        <div class="chart-toolbar"><div><strong>EUR/USD</strong> <span class="badge blue">H1</span><div class="stat-foot" style="margin-top:7px">الرسم التوضيحي · ليس سعراً حياً</div></div><div class="stat-value" style="font-size:20px;margin:0">1.08426</div></div>
+        <div class="chart-wrap"><canvas id="homeChart"></canvas></div>
+        <div class="chart-legend"><span><i class="legend-dot" style="background:var(--cyan)"></i>السعر التوضيحي</span><span><i class="legend-dot" style="background:var(--purple)"></i>متوسط متحرك توضيحي</span></div>
+      </div>
+      <div class="card"><div class="section-head" style="margin:0 0 10px"><div><h3>ملاحظات الفريق</h3><p>مثال على تقرير تحليلي، وليس توصية مباشرة.</p></div></div>
+        <div class="signal"><div class="signal-icon">⌁</div><div><h4>السياق العام</h4><p>انتظر تأكيد الاتجاه على إطار زمني أعلى قبل تقييم أي دخول.</p></div></div>
+        <div class="signal"><div class="signal-icon">◈</div><div><h4>إدارة الفرصة</h4><p>احسب حجم العقد من مسافة الوقف والمخاطرة النقدية أولاً.</p></div></div>
+        <div class="signal"><div class="signal-icon">◷</div><div><h4>مراقبة الأخبار</h4><p>مصدر التقويم غير مربوط. لا تعتمد على هذه الصفحة لمواعيد حقيقية.</p></div></div>
+      </div>
+    </div>
+    <div class="footer-note">تنبيه: هذه نسخة HTML أمامية مستقلة. الأرصدة والأسعار والصفقات المعروضة بيانات توضيحية ثابتة أو مولّدة داخل المتصفح. لا يوجد اتصال حقيقي بالأسواق أو تنفيذ أوامر من هذا الملف وحده.</div>
+  </section>
+
+  <section class="view" id="view-market">
+    <div class="notice"><strong>وضع العرض:</strong> الأسعار والرسم أدناه توضيحية وليست أسعار سوق مباشرة. لتفعيل بيانات حقيقية يلزم ربط مزود بيانات وخادم Backend.</div>
+    <div class="grid stats">
+      <div class="card"><div class="stat-label">الأداة المختارة</div><div class="stat-value" style="font-size:22px">EUR/USD</div><div class="stat-foot">فوركس · مثال</div></div>
+      <div class="card"><div class="stat-label">سعر العرض Bid</div><div class="stat-value">1.08426</div><div class="stat-foot">غير متصل بالوسيط</div></div>
+      <div class="card"><div class="stat-label">سعر الطلب Ask</div><div class="stat-value">1.08438</div><div class="stat-foot">سبريد توضيحي 1.2 نقطة</div></div>
+      <div class="card"><div class="stat-label">حالة البيانات</div><div class="stat-value" style="font-size:20px;color:var(--gold)">غير متصلة</div><div class="stat-foot">يلزم إعداد API</div></div>
+    </div>
+    <div class="card chart-card">
+      <div class="chart-toolbar"><div><h3 style="margin:0 0 7px">الرسم البياني</h3><span class="stat-foot">شموع اصطناعية لتجربة الواجهة</span></div><div style="display:flex;gap:8px;flex-wrap:wrap"><select class="pair-select" id="pairSelect"><option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option><option>XAU/USD</option><option>BTC/USD</option></select><div class="timeframes" id="timeframes"><button class="active">M5</button><button>M15</button><button>H1</button><button>H4</button><button>D1</button></div></div></div>
+      <div class="chart-wrap" style="height:380px"><canvas id="marketChart"></canvas></div>
+      <div class="chart-legend"><span><i class="legend-dot" style="background:var(--green)"></i>شمعة صاعدة</span><span><i class="legend-dot" style="background:var(--red)"></i>شمعة هابطة</span><span><i class="legend-dot" style="background:var(--purple)"></i>متوسط متحرك</span></div>
+    </div>
+    <div class="section-head"><div><h3>مؤشرات فنية</h3><p>قيم نموذجية للتصميم فقط.</p></div></div>
+    <div class="grid stats">
+      <div class="card"><div class="stat-label">RSI (14)</div><div class="stat-value">54.8</div><div class="stat-foot">منطقة محايدة توضيحية</div></div>
+      <div class="card"><div class="stat-label">ATR (14)</div><div class="stat-value">0.00082</div><div class="stat-foot">قيمة مثال</div></div>
+      <div class="card"><div class="stat-label">ADX (14)</div><div class="stat-value">21.6</div><div class="stat-foot">قيمة مثال</div></div>
+      <div class="card"><div class="stat-label">الاتجاه النموذجي</div><div class="stat-value" style="font-size:20px;color:var(--gold)">محايد</div><div class="stat-foot">لا توجد إشارة تنفيذ</div></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-strategies">
+    <div class="notice"><strong>مهم:</strong> تفعيل الاستراتيجية هنا يحفظ اختيارها في الواجهة فقط. لا يرسل أوامر تداول. اختبر كل استراتيجية خارج العينة وبعد احتساب التكاليف قبل استخدامها فعلياً.</div>
+    <div class="grid strategy-grid">
+      <div class="card strategy-card"><div class="stat-label">01 · TREND</div><h4>اتباع الاتجاه</h4><p>EMA 50/200 مع ADX وتصحيح سعري ووقف مبني على ATR.</p><div class="strategy-meta"><span class="badge blue">EMA</span><span class="badge blue">ADX</span><span class="badge gold">متوسط المخاطر</span></div><div class="setting-row"><div><strong>تفعيل في قائمة الاختبار</strong><small>ليس تداولاً حقيقياً</small></div><label class="switch"><input type="checkbox" class="strategy-toggle" data-name="اتباع الاتجاه"><span class="slider"></span></label></div></div>
+      <div class="card strategy-card"><div class="stat-label">02 · BREAKOUT</div><h4>الاختراق وإعادة الاختبار</h4><p>تأكيد الإغلاق خارج النطاق ثم فحص إعادة الاختبار والسبريد.</p><div class="strategy-meta"><span class="badge blue">Price Action</span><span class="badge gold">متوسط المخاطر</span></div><div class="setting-row"><div><strong>تفعيل في قائمة الاختبار</strong><small>ليس تداولاً حقيقياً</small></div><label class="switch"><input type="checkbox" class="strategy-toggle" data-name="الاختراق وإعادة الاختبار"><span class="slider"></span></label></div></div>
+      <div class="card strategy-card"><div class="stat-label">03 · LIQUIDITY</div><h4>سحب السيولة وبنية السوق</h4><p>مراقبة القمم والقيعان مع تأكيد تغير البنية وتحديد الإبطال.</p><div class="strategy-meta"><span class="badge blue">BOS / CHOCH</span><span class="badge gold">متوسط إلى مرتفع</span></div><div class="setting-row"><div><strong>تفعيل في قائمة الاختبار</strong><small>ليس تداولاً حقيقياً</small></div><label class="switch"><input type="checkbox" class="strategy-toggle" data-name="سحب السيولة"><span class="slider"></span></label></div></div>
+      <div class="card strategy-card"><div class="stat-label">04 · MEAN REVERSION</div><h4>العودة إلى المتوسط</h4><p>تعمل فقط ضمن نطاق عرضي موثّق، وتتوقف عند ظهور اتجاه قوي.</p><div class="strategy-meta"><span class="badge blue">RSI</span><span class="badge blue">Bollinger</span></div><div class="setting-row"><div><strong>تفعيل في قائمة الاختبار</strong><small>ليس تداولاً حقيقياً</small></div><label class="switch"><input type="checkbox" class="strategy-toggle" data-name="العودة إلى المتوسط"><span class="slider"></span></label></div></div>
+      <div class="card strategy-card"><div class="stat-label">05 · SESSION</div><h4>اختراق الجلسات</h4><p>قياس نطاق آسيا ومراقبة لندن ونيويورك مع فلتر أخبار وسبريد.</p><div class="strategy-meta"><span class="badge blue">Sessions</span><span class="badge gold">مرتبط بالوقت</span></div><div class="setting-row"><div><strong>تفعيل في قائمة الاختبار</strong><small>ليس تداولاً حقيقياً</small></div><label class="switch"><input type="checkbox" class="strategy-toggle" data-name="اختراق الجلسات"><span class="slider"></span></label></div></div>
+      <div class="card strategy-card"><div class="stat-label">06 · AI REGIME</div><h4>تصنيف حالة السوق</h4><p>تمييز الاتجاه والنطاق والتذبذب العالي لتصفية الفرص أو منع التداول.</p><div class="strategy-meta"><span class="badge blue">Regime Detection</span><span class="badge blue">فلترة</span></div><div class="setting-row"><div><strong>تفعيل في قائمة الاختبار</strong><small>يتطلب نموذجاً وبيانات</small></div><label class="switch"><input type="checkbox" class="strategy-toggle" data-name="تصنيف حالة السوق"><span class="slider"></span></label></div></div>
+    </div>
+    <div class="section-head"><div><h3>مختبر الاختبار التاريخي</h3><p>واجهة إعدادات أولية، تحتاج محرك Backtesting وبيانات موثوقة لتنتج نتائج فعلية.</p></div></div>
+    <div class="card">
+      <div class="form-grid"><div class="field"><label>الاستراتيجية</label><select id="btStrategy"><option>اتباع الاتجاه</option><option>الاختراق وإعادة الاختبار</option><option>سحب السيولة</option><option>العودة إلى المتوسط</option><option>اختراق الجلسات</option></select></div><div class="field"><label>الأداة</label><select><option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option><option>XAU/USD</option></select></div><div class="field"><label>رأس المال الافتراضي ($)</label><input id="btCapital" type="number" min="100" value="10000"></div><div class="field"><label>المخاطرة لكل صفقة (%)</label><input id="btRisk" type="number" min="0.1" max="1" step="0.1" value="0.5"></div></div>
+      <button class="primary-btn" id="runBacktest">تحقق من إعدادات الاختبار</button><div id="btResult" class="footer-note">لم يتم تشغيل اختبار تاريخي حقيقي. لا توجد بيانات أو نتائج أداء موصولة في هذه النسخة.</div>
+    </div>
+  </section>
+
+  <section class="view" id="view-calendar">
+    <div class="notice"><strong>التقويم غير مربوط:</strong> الأحداث أدناه أمثلة توضيحية فقط، وليست مواعيد اقتصادية حالية. لا تعتمد عليها لاتخاذ قرار تداول. يلزم تكامل API موثوق ومزامنة التوقيت.</div>
+    <div class="grid stats">
+      <div class="card"><div class="stat-label">أحداث اليوم</div><div class="stat-value">08</div><div class="stat-foot">عدد توضيحي</div></div>
+      <div class="card"><div class="stat-label">تأثير مرتفع</div><div class="stat-value" style="color:var(--red)">03</div><div class="stat-foot">عدد توضيحي</div></div>
+      <div class="card"><div class="stat-label">التنبيهات</div><div class="stat-value">15 / 30 / 60</div><div class="stat-foot">دقيقة قبل الحدث</div></div>
+      <div class="card"><div class="stat-label">حالة المصدر</div><div class="stat-value" style="font-size:19px;color:var(--gold)">غير متصل</div><div class="stat-foot">يلزم إعداد API</div></div>
+    </div>
+    <div class="section-head"><div><h3>الأحداث الاقتصادية</h3><p>عينات تصميمية لإظهار شكل التقويم.</p></div><button class="secondary-btn" id="reminderSettings">إعداد التذكيرات</button></div>
+    <div class="calendar-list">
+      <div class="event"><div class="event-time">15:30 UTC</div><div><h4><span class="impact high"></span>قرار أسعار الفائدة</h4><p>الولايات المتحدة · USD · مثال توضيحي</p></div><span class="badge red">مرتفع</span></div>
+      <div class="event"><div class="event-time">13:30 UTC</div><div><h4><span class="impact high"></span>مؤشر أسعار المستهلك CPI</h4><p>الولايات المتحدة · USD · مثال توضيحي</p></div><span class="badge red">مرتفع</span></div>
+      <div class="event"><div class="event-time">09:00 UTC</div><div><h4><span class="impact medium"></span>مؤشر مديري المشتريات PMI</h4><p>منطقة اليورو · EUR · مثال توضيحي</p></div><span class="badge gold">متوسط</span></div>
+      <div class="event"><div class="event-time">07:00 UTC</div><div><h4><span class="impact low"></span>بيانات تجارية</h4><p>المملكة المتحدة · GBP · مثال توضيحي</p></div><span class="badge green">منخفض</span></div>
+    </div>
+    <div class="section-head"><div><h3>قواعد ما قبل الخبر</h3><p>إعدادات مقترحة تحتاج تطبيقها في خادم التنفيذ.</p></div></div>
+    <div class="card">
+      <div class="setting-row"><div><strong>تنبيه قبل 60 دقيقة</strong><small>إشعار مبكر للأحداث المؤثرة</small></div><label class="switch"><input type="checkbox" checked class="local-setting"><span class="slider"></span></label></div>
+      <div class="setting-row"><div><strong>تنبيه قبل 30 دقيقة</strong><small>مراجعة المراكز والتعرض للعملات</small></div><label class="switch"><input type="checkbox" checked class="local-setting"><span class="slider"></span></label></div>
+      <div class="setting-row"><div><strong>تنبيه قبل 15 دقيقة</strong><small>فحص السبريد والسيولة</small></div><label class="switch"><input type="checkbox" checked class="local-setting"><span class="slider"></span></label></div>
+      <div class="setting-row"><div><strong>منع فتح صفقات جديدة قرب الأخبار عالية التأثير</strong><small>يجب تطبيق المنع على الخادم وليس الواجهة فقط</small></div><label class="switch"><input type="checkbox" class="local-setting"><span class="slider"></span></label></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-risk">
+    <div class="notice"><strong>إدارة المخاطر هنا أداة حسابية محلية فقط.</strong> لا تفرض هذه الحدود نفسها على الوسيط حتى يتم تنفيذها والتحقق منها داخل خادم التداول.</div>
+    <div class="grid cols">
+      <div class="card"><h3 style="margin-top:0">حاسبة حجم الصفقة</h3><p class="stat-foot" style="line-height:1.8">احسب المخاطرة النقدية وحجم العقد التقريبي. النتيجة لا تستبدل مواصفات الرمز وقيمة النقطة من الوسيط.</p>
+        <div class="form-grid"><div class="field"><label>حقوق الحساب ($)</label><input id="equity" type="number" value="10000" min="0"></div><div class="field"><label>المخاطرة (%)</label><input id="riskPct" type="number" value="0.5" min="0.1" max="1" step="0.1"></div><div class="field"><label>مسافة وقف الخسارة (نقطة)</label><input id="stopPips" type="number" value="25" min="1"></div><div class="field"><label>قيمة النقطة لكل لوت ($)</label><input id="pipValue" type="number" value="10" min="0.01" step="0.1"></div></div>
+        <button class="primary-btn" id="calcRisk">احسب الحجم التقريبي</button><div id="riskResult" class="card" style="margin-top:15px;background:#0b121c"><div class="stat-label">المخاطرة النقدية</div><div class="stat-value" style="font-size:24px">$50.00</div><div class="stat-foot">الحجم التقريبي: 0.20 لوت · مثال فقط</div></div>
+      </div>
+      <div class="card"><h3 style="margin-top:0">حدود الحماية</h3>
+        <div class="setting-row"><div><strong>مخاطرة الصفقة الافتراضية</strong><small>0.5% من حقوق الحساب</small></div><span class="badge blue">0.5%</span></div>
+        <div class="setting-row"><div><strong>حد الخسارة اليومية</strong><small>قيمة أولية قابلة للتعديل</small></div><span class="badge gold">2%</span></div>
+        <div class="setting-row"><div><strong>حد السحب الإجمالي</strong><small>يجب مطابقته لشروط الحساب</small></div><span class="badge gold">5%</span></div>
+        <div class="setting-row"><div><strong>مضاعفة العقود بعد الخسارة</strong><small>ممنوعة افتراضياً</small></div><span class="badge red">معطلة</span></div>
+        <div class="setting-row"><div><strong>إيقاف فتح صفقات جديدة</strong><small>مفتاح واجهة تجريبي</small></div><label class="switch"><input type="checkbox" id="pauseTrading" checked><span class="slider"></span></label></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-history">
+    <div class="notice"><strong>سجل توضيحي:</strong> هذه الصفوف ليست صفقات منفذة. سجل التداول الحقيقي يجب أن يأتي من الوسيط ويحتفظ بمعرفات الأوامر والتوقيت والانزلاق والعمولات.</div>
+    <div class="card"><div class="section-head" style="margin-top:0"><div><h3>سجل الصفقات</h3><p>أمثلة على شكل سجل التنفيذ.</p></div><button class="secondary-btn" id="exportCsv">تصدير CSV</button></div>
+      <div class="table-wrap"><table id="tradeTable"><thead><tr><th>الأداة</th><th>الاتجاه</th><th>الاستراتيجية</th><th>الدخول</th><th>الخروج</th><th>النتيجة</th><th>الحالة</th></tr></thead><tbody>
+      <tr><td>EUR/USD</td><td class="up">شراء</td><td>اتباع الاتجاه</td><td>1.08210</td><td>1.08410</td><td class="up">+$20.00</td><td><span class="badge gold">مثال</span></td></tr>
+      <tr><td>GBP/USD</td><td class="down">بيع</td><td>اختراق الجلسات</td><td>1.27100</td><td>1.27220</td><td class="down">-$12.00</td><td><span class="badge gold">مثال</span></td></tr>
+      <tr><td>XAU/USD</td><td class="up">شراء</td><td>بنية السوق</td><td>2328.00</td><td>2331.50</td><td class="up">+$35.00</td><td><span class="badge gold">مثال</span></td></tr>
+      </tbody></table></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-accounts">
+    <div class="notice"><strong>لم يتم ربط أي حساب.</strong> هذا النموذج يحفظ اختيارات الواجهة محلياً فقط. لا تدخل كلمة مرورك هنا؛ الربط الحقيقي يحتاج خادم آمن وتكامل MT5 أو موفر API موثوق.</div>
+    <div class="grid cols">
+      <div class="card"><h3 style="margin-top:0">إعداد اتصال الوسيط</h3><div class="field"><label>نوع الحساب</label><select id="accountType"><option>Demo · تجريبي</option><option>Live · حقيقي</option><option>Prop Firm · ممول</option></select></div><div class="field"><label>الوسيط / مزود الاتصال</label><select id="broker"><option>لم يتم الاختيار</option><option>MetaTrader 5 عبر خادم مخصص</option><option>موفر API مرخص</option><option>وسيط يدعم FIX API</option></select></div><div class="field"><label>اسم خادم التداول (اختياري)</label><input id="serverName" placeholder="مثال: اسم الخادم الذي يوفره الوسيط"></div><div class="field"><label>معرّف الحساب (لا تضع كلمة المرور)</label><input id="accountId" placeholder="يستخدم للعرض المحلي فقط"></div><div class="form-actions"><button class="primary-btn" id="testConnection">فحص الإعدادات</button><button class="secondary-btn" id="clearAccount">مسح الحقول</button></div><p class="footer-note" id="connectionResult">حالة الاتصال: غير مربوط. أدخل رمز API المحلي بعد تشغيل جسر MT5.</p>
+      <div class="field" style="margin-top:12px"><label>رمز API المحلي (غيّره في الخادم)</label><input id="apiToken" type="password" autocomplete="off" placeholder="TITAN_API_TOKEN"></div>
+      <button class="secondary-btn" id="refreshMt5" type="button">قراءة حالة MT5 والحساب</button>
+      <div id="liveAccountPanel" class="card" style="margin-top:12px;background:#0b121c"><div class="stat-label">بيانات MT5</div><div class="stat-foot">لم يتم جلب بيانات بعد.</div></div></div>
+      <div class="card"><h3 style="margin-top:0">حالة التكامل</h3><div class="setting-row"><div><strong>مزود الأسعار</strong><small>REST / WebSocket API</small></div><span class="badge red">غير مهيأ</span></div><div class="setting-row"><div><strong>خادم MT5</strong><small>خدمة تنفيذ مستقلة</small></div><span class="badge red">غير مهيأ</span></div><div class="setting-row"><div><strong>قاعدة البيانات</strong><small>PostgreSQL مطلوب للإنتاج</small></div><span class="badge gold">غير موصولة</span></div><div class="setting-row"><div><strong>تقويم الأخبار</strong><small>API مرخص وتحديث دوري</small></div><span class="badge red">غير مهيأ</span></div><div class="setting-row"><div><strong>المراقبة 24/7</strong><small>خادم دائم التشغيل وتنبيهات</small></div><span class="badge red">غير مهيأ</span></div></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-settings">
+    <div class="grid cols">
+      <div class="card"><h3 style="margin-top:0">تفضيلات الواجهة</h3>
+        <div class="setting-row"><div><strong>التنبيهات داخل الواجهة</strong><small>إظهار إشعارات تجريبية محلية</small></div><label class="switch"><input type="checkbox" checked class="local-setting"><span class="slider"></span></label></div>
+        <div class="setting-row"><div><strong>تقليل الحركة</strong><small>راحة أفضل للأجهزة الضعيفة</small></div><label class="switch"><input type="checkbox" id="reduceMotion"><span class="slider"></span></label></div>
+        <div class="setting-row"><div><strong>تأكيد قبل إجراءات التداول</strong><small>يجب فرضه أيضاً على الخادم</small></div><label class="switch"><input type="checkbox" checked class="local-setting"><span class="slider"></span></label></div>
+        <div class="setting-row"><div><strong>وضع التداول الحقيقي</strong><small>غير متاح في نسخة HTML المستقلة</small></div><span class="badge red">مقفول</span></div>
+      </div>
+      <div class="card"><h3 style="margin-top:0">متطلبات النشر</h3><div class="signal"><div class="signal-icon">01</div><div><h4>خادم Backend آمن</h4><p>مصادقة، صلاحيات، إدارة أسرار، وتحقق من كل طلب.</p></div></div><div class="signal"><div class="signal-icon">02</div><div><h4>خدمة اتصال بالوسيط</h4><p>تعمل على بيئة متوافقة مع MT5 أو API موثق.</p></div></div><div class="signal"><div class="signal-icon">03</div><div><h4>مراقبة واستعادة</h4><p>Heartbeat، سجلات، تنبيهات، نسخ احتياطية واختبارات أعطال.</p></div></div><div class="signal"><div class="signal-icon">04</div><div><h4>اختبارات قبل الإطلاق</h4><p>Demo أولاً، ثم مراجعة النتائج وحدود المخاطر قبل أي تفعيل حي.</p></div></div></div>
+    </div>
+    <p class="footer-note">هذه الواجهة الأمامية ملف واحد لتجربة التصميم والتفاعل. لا تخزن بيانات التداول في خادم ولا تحتوي مفاتيح API. يلزم بناء Backend منفصل واختباره قبل استخدامها في بيئة حقيقية.</p>
+  </section>
+</main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal"><div class="eyebrow">TITAN AI / AGENT REPORT</div><h3 id="modalTitle">تقرير الشخصية</h3><p id="modalText"></p><div class="modal-actions"><button class="primary-btn" id="modalClose">إغلاق التقرير</button></div></div></div>
+<script>
+const titles={home:'غرفة الذكاء الاصطناعي',market:'السوق المباشر',strategies:'الاستراتيجيات ومختبر الاختبار',calendar:'الأخبار الاقتصادية',risk:'إدارة المخاطر',history:'سجل الصفقات',accounts:'الحسابات والربط',settings:'الإعدادات'};
+const navButtons=[...document.querySelectorAll('[data-view]')];
+function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));navButtons.forEach(b=>b.classList.toggle('active',b.dataset.view===name));document.getElementById('pageTitle').textContent=titles[name]||titles.home;document.getElementById('sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});setTimeout(drawAllCharts,80)}
+navButtons.forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.goto)));
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
+let toastTimer;function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3200)}
+const agentReports={
+ analyst:['ليان · المحللة','أبدأ بتحديد اتجاه الإطار الأعلى، ثم أراجع بنية السوق ومناطق الدعم والمقاومة. لا توجد بيانات سوق حية في هذه النسخة، لذلك لا يمكنني إصدار إشارة دخول موثوقة.'],
+ chart:['آدم · رسام الشارت','يمكن لمحرك الرسم الحقيقي عرض الشموع والمتوسطات والمستويات بعد ربط بيانات الوسيط. الرسم الحالي تجريبي، ولا ينبغي استخدام مستوياته في التداول.'],
+ writer:['نور · الباحثة','يجب أن يتضمن التقرير الحقيقي مصدر البيانات ووقت التحديث والسيناريوهات البديلة وأسباب إبطال الفرضية. تقويم الأخبار في هذه النسخة غير متصل.'],
+ brain:['تيتان · العقل المفكر','القرار الآمن حالياً هو عدم إرسال أي أوامر: مصدر الأسعار غير مربوط، ونتائج الاختبار غير متاحة، ولا يمكن التحقق من المخاطر أو جودة التنفيذ.']
+};
+document.querySelectorAll('[data-agent]').forEach(el=>el.addEventListener('click',()=>{const r=agentReports[el.dataset.agent];document.getElementById('modalTitle').textContent=r[0];document.getElementById('modalText').textContent=r[1];document.getElementById('modalBackdrop').classList.add('show')}));
+function closeModal(){document.getElementById('modalBackdrop').classList.remove('show')}
+document.getElementById('modalClose').addEventListener('click',closeModal);document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});
+document.getElementById('notifyBtn').addEventListener('click',()=>toast('لا توجد تنبيهات حقيقية: مصدر الأخبار وخدمة الإشعارات غير مربوطين.'));
+document.querySelectorAll('.strategy-toggle').forEach(x=>x.addEventListener('change',()=>toast(x.checked?'تم اختيار «'+x.dataset.name+'» لقائمة الاختبار المحلية.':'تمت إزالة «'+x.dataset.name+'» من قائمة الاختبار المحلية.')));
+document.getElementById('runBacktest').addEventListener('click',()=>{const cap=Number(document.getElementById('btCapital').value),risk=Number(document.getElementById('btRisk').value);const el=document.getElementById('btResult');if(!Number.isFinite(cap)||cap<100||!Number.isFinite(risk)||risk<=0||risk>1){el.textContent='تحقق من رأس المال والمخاطرة. الحد في هذه الواجهة 1% لكل صفقة.';return}el.textContent='تم التحقق من الإعدادات فقط: '+document.getElementById('btStrategy').value+'، رأس المال الافتراضي $'+cap.toLocaleString('en-US')+'، المخاطرة '+risk+'%. لم يُجرَ اختبار تاريخي لعدم وجود محرك أو بيانات موصولة.';toast('إعدادات الاختبار سليمة، لكن محرك الاختبار غير مربوط.')});
+document.getElementById('calcRisk').addEventListener('click',()=>{const eq=Number(document.getElementById('equity').value),pct=Number(document.getElementById('riskPct').value),stop=Number(document.getElementById('stopPips').value),pv=Number(document.getElementById('pipValue').value),out=document.getElementById('riskResult');if(eq<=0||pct<=0||pct>1||stop<=0||pv<=0||![eq,pct,stop,pv].every(Number.isFinite)){out.innerHTML='<span class="down">أدخل قيماً صحيحة. الحد المقترح في هذه الحاسبة 1% لكل صفقة.</span>';return}const cash=eq*pct/100,lot=cash/(stop*pv);out.innerHTML='<div class="stat-label">المخاطرة النقدية التقريبية</div><div class="stat-value" style="font-size:24px">$'+cash.toFixed(2)+'</div><div class="stat-foot">حجم تقريبي: '+lot.toFixed(3)+' لوت · تحقق من قيمة النقطة ومواصفات الرمز لدى وسيطك.</div>';});
+document.getElementById('pauseTrading').addEventListener('change',e=>toast(e.target.checked?'واجهة الإيقاف مفعّلة محلياً. لا يوجد محرك تداول متصل.':'تم تغيير حالة المفتاح محلياً فقط، وليس تشغيل التداول الحقيقي.'));
+document.getElementById('testConnection').addEventListener('click',()=>{const broker=document.getElementById('broker').value,server=document.getElementById('serverName').value.trim();const out=document.getElementById('connectionResult');if(broker==='لم يتم الاختيار'){out.textContent='اختر نوع اتصال أولاً. هذا الفحص لا يتصل فعلياً بالوسيط.';toast('اختر موفر اتصال أولاً.');return}out.textContent='تم فحص الحقول محلياً فقط. '+broker+(server?' · الخادم: '+server:'')+' — لا يوجد Backend لإجراء اتصال فعلي.';toast('فحص محلي فقط: الاتصال الحقيقي غير متاح في ملف HTML وحده.')});
+document.getElementById('clearAccount').addEventListener('click',()=>{document.getElementById('serverName').value='';document.getElementById('accountId').value='';document.getElementById('broker').selectedIndex=0;document.getElementById('connectionResult').textContent='تم مسح الحقول المحلية. حالة الاتصال: غير مربوط.'});
+document.getElementById('reminderSettings').addEventListener('click',()=>toast('يمكن تغيير مفاتيح التذكير في هذه الصفحة؛ إرسال تنبيهات فعلية يتطلب Backend ومزود تقويم.'));
+document.getElementById('reduceMotion').addEventListener('change',e=>{document.documentElement.style.scrollBehavior=e.target.checked?'auto':'smooth';document.body.classList.toggle('reduce-motion',e.target.checked);toast(e.target.checked?'تم تقليل سلوك الحركة المدعوم.':'تمت استعادة الحركة.')});
+document.getElementById('exportCsv').addEventListener('click',()=>{const rows=[...document.querySelectorAll('#tradeTable tr')].map(tr=>[...tr.children].map(td=>'"'+td.innerText.replace(/"/g,'""')+'"').join(','));const blob=new Blob(['\ufeff'+rows.join('\r\n')],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='titan-demo-trade-log.csv';a.click();URL.revokeObjectURL(url);toast('تم تصدير سجل الأمثلة إلى CSV.')});
+document.getElementById('timeframes').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#timeframes button').forEach(x=>x.classList.remove('active'));b.classList.add('active');drawChart(document.getElementById('marketChart'),b.textContent)}));
+document.getElementById('pairSelect').addEventListener('change',e=>{toast('تم اختيار '+e.target.value+' في الواجهة؛ الأسعار لا تزال توضيحية.');drawChart(document.getElementById('marketChart'),document.querySelector('#timeframes button.active')?.textContent||'M5')});
+function drawChart(canvas,frame='H1'){if(!canvas||!canvas.getContext)return;const rect=canvas.getBoundingClientRect();if(rect.width<20||rect.height<20)return;const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);const pad={l:12,r:48,t:12,b:20},cw=w-pad.l-pad.r,ch=h-pad.t-pad.b;ctx.strokeStyle='rgba(139,153,180,.13)';ctx.lineWidth=1;for(let i=0;i<=5;i++){let y=pad.t+ch*i/5;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke()}for(let i=0;i<=6;i++){let x=pad.l+cw*i/6;ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,h-pad.b);ctx.stroke()}
+let seed=frame.split('').reduce((a,c)=>a+c.charCodeAt(0),0)+document.getElementById('pairSelect')?.selectedIndex*13||4;function rand(){seed=(seed*9301+49297)%233280;return seed/233280}let vals=[],v=.52;for(let i=0;i<55;i++){v+=((rand()-.48)*.12);v=Math.max(.17,Math.min(.83,v));vals.push(v)}const xAt=i=>pad.l+cw*(i+.5)/vals.length,yAt=v=>pad.t+ch*(1-v);
+for(let i=0;i<vals.length;i++){const x=xAt(i),o=vals[Math.max(0,i-1)],c=vals[i],high=Math.min(1,Math.max(o,c)+rand()*.09),low=Math.max(0,Math.min(o,c)-rand()*.09);ctx.strokeStyle=c>=o?'#42d6a0':'#ff647c';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,yAt(high));ctx.lineTo(x,yAt(low));ctx.stroke();let top=Math.min(yAt(o),yAt(c)),bh=Math.max(2,Math.abs(yAt(o)-yAt(c)));ctx.fillRect(x-2.5,top,5,bh)}
+ctx.strokeStyle='#9a7bff';ctx.lineWidth=1.5;ctx.beginPath();vals.forEach((v,i)=>{const avg=vals.slice(Math.max(0,i-5),i+1).reduce((a,b)=>a+b,0)/Math.min(i+1,6);i?ctx.lineTo(xAt(i),yAt(avg)):ctx.moveTo(xAt(i),yAt(avg))});ctx.stroke();ctx.fillStyle='#8591a8';ctx.font='10px Tahoma';ctx.textAlign='left';for(let i=0;i<=5;i++){ctx.fillText((1.0900-i*.002).toFixed(4),w-pad.r+5,pad.t+ch*i/5+3)}ctx.textAlign='center';['-5','-4','-3','-2','-1','الآن'].forEach((s,i)=>ctx.fillText(s,pad.l+cw*i/5,h-4))}
+function drawAllCharts(){drawChart(document.getElementById('homeChart'),'H1');drawChart(document.getElementById('marketChart'),document.querySelector('#timeframes button.active')?.textContent||'M5')}
+window.addEventListener('resize',()=>{clearTimeout(window.__chartTimer);window.__chartTimer=setTimeout(drawAllCharts,120)});window.addEventListener('load',()=>setTimeout(drawAllCharts,120));
+</script>
+
+<script>
+(function(){
+ const base='http://127.0.0.1:8765';
+ const tokenEl=document.getElementById('apiToken');
+ const resultEl=document.getElementById('connectionResult');
+ const panel=document.getElementById('liveAccountPanel');
+ async function api(path){
+   const token=(tokenEl&&tokenEl.value)||'change-this-token';
+   const r=await fetch(base+path,{headers:{'X-Titan-Token':token}});
+   let data={};try{data=await r.json()}catch(e){}
+   if(!r.ok)throw new Error(data.detail||('HTTP '+r.status));
+   return data;
+ }
+ async function refresh(){
+   resultEl.textContent='正在连接本机 MT5 bridge…';
+   panel.innerHTML='<div class="stat-foot">正在读取真实账户信息…</div>';
+   try{
+     const [s,a]=await Promise.all([api('/api/status'),api('/api/account')]);
+     resultEl.textContent='اتصال MT5 ناجح · الحساب '+s.account_login+' · '+s.server+' · العملة '+a.currency;
+     panel.innerHTML='<div class="stat-label">حساب MT5 متصل <span class="badge green">LIVE DATA</span></div>'+
+       '<div class="stat-value" style="font-size:22px">'+Number(a.balance).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+' '+a.currency+'</div>'+
+       '<div class="stat-foot">الرصيد Balance · Equity: '+Number(a.equity).toFixed(2)+' '+a.currency+' · الربح العائم: '+Number(a.profit).toFixed(2)+' '+a.currency+'</div>'+
+       '<div class="stat-foot" style="margin-top:8px">الحساب: '+s.account_login+' · الخادم: '+s.server+' · التداول الحقيقي عبر الجسر: '+(s.live_trading_enabled_in_bridge?'مفعّل':'مقفول')+'</div>';
+     toast('تم جلب بيانات حساب MT5 من الجسر المحلي.');
+   }catch(e){
+     resultEl.textContent='تعذر الاتصال: '+e.message+' — تأكد من تشغيل START_MT5_BRIDGE.bat وفتح MT5.';
+     panel.innerHTML='<div class="stat-label">غير متصل</div><div class="stat-foot">لم يتم جلب بيانات حقيقية. تحقق من MT5 ورمز API والخادم المحلي.</div>';
+     toast('تعذر الاتصال بجسر MT5: '+e.message);
+   }
+ }
+ const btn=document.getElementById('refreshMt5');
+ if(btn)btn.addEventListener('click',refresh);
+ const oldTest=document.getElementById('testConnection');
+ if(oldTest)oldTest.addEventListener('click',()=>{setTimeout(refresh,50)});
+})();
+</script>
+
+</body>
+</html>
