@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TITAN — مركز قيادة التداول MT5</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#0e0f12;--card:#16181d;--card2:#1c1f26;--bd:#2a2e37;--fg:#e8e6df;--mut:#8b909c;--gold:#d9a93a;--bull:#26a269;--bear:#e0475b;--warn:#e5a73b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:14px}
+.num{font-family:"JetBrains Mono",ui-monospace,monospace;direction:ltr;unicode-bidi:isolate;display:inline-block}
+button,input,select{font:inherit;color:inherit}
+button{background:var(--card2);border:1px solid var(--bd);border-radius:8px;padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--gold)}
+button.pri{background:var(--gold);color:#17130a;border-color:var(--gold);font-weight:700}
+button.buy{background:var(--bull);border-color:var(--bull);color:#fff;font-weight:700}
+button.sell{background:var(--bear);border-color:var(--bear);color:#fff;font-weight:700}
+button.danger{background:#3a1820;border-color:var(--bear);color:#ffb3bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,select{background:#0f1115;border:1px solid var(--bd);border-radius:8px;padding:8px 10px;width:100%}
+label{display:block;color:var(--mut);font-size:12px;margin-bottom:4px}
+.wrap{max-width:1280px;margin:0 auto;padding:14px}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.logo{font-size:22px;font-weight:800;color:var(--gold);letter-spacing:2px}
+.grid{display:grid;gap:12px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.panel h3{margin:0 0 10px;font-size:13px;color:var(--mut);font-weight:600}
+.stat .v{font-size:22px;font-weight:700;margin-top:2px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;border:1px solid var(--bd);font-size:12px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mut)}
+.ok .dot{background:var(--bull);box-shadow:0 0 8px var(--bull)}.ok{color:#8be0b6}
+.bad .dot{background:var(--bear)}.bad{color:#ff9aa8}
+.wn .dot{background:var(--warn)}.wn{color:#f3cf84}
+table{width:100%;border-collapse:collapse}
+th{color:var(--mut);font-weight:500;font-size:12px;text-align:start;padding:6px 8px;border-bottom:1px solid var(--bd)}
+td{padding:7px 8px;border-bottom:1px solid #20232b}
+tr.sel td{background:#20232b}
+tr.clk{cursor:pointer}
+.up{color:var(--bull)}.dn{color:var(--bear)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tabs button.on{border-color:var(--gold);color:var(--gold)}
+canvas{width:100%;height:340px;display:block;background:#0f1115;border-radius:8px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.msg{margin-top:8px;padding:8px 10px;border-radius:8px;background:#20232b;font-size:13px;line-height:1.7}
+.msg.err{background:#2a151b;color:#ffb3bd}.msg.good{background:#12281e;color:#9be8bf}
+.scroll{overflow-x:auto}
+code,pre{font-family:"JetBrains Mono",monospace;direction:ltr;text-align:left;background:#0f1115;border:1px solid var(--bd);border-radius:8px}
+pre{padding:10px;overflow:auto;margin:6px 0;white-space:pre-wrap;word-break:break-all}
+code{padding:1px 6px}
+.hide{display:none!important}
+.login{max-width:380px;margin:12vh auto}
+ol{padding-inline-start:20px;line-height:1.9;margin:6px 0}
+.emerg{background:#2a1218;border-color:var(--bear)}
+.checks div{padding:3px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- LOGIN -->
+<div id="loginView" class="login hide">
+  <div class="panel">
+    <div style="text-align:center;margin-bottom:16px"><div class="logo">TITAN</div><div style="color:var(--mut);margin-top:4px">مركز قيادة التداول — MT5</div></div>
+    <label>البريد الإلكتروني</label><input id="email" type="email" dir="ltr" autocomplete="username">
+    <div style="height:10px"></div>
+    <label>كلمة المرور</label><input id="pw" type="password" dir="ltr" minlength="8" autocomplete="current-password">
+    <div style="height:14px"></div>
+    <button class="pri" style="width:100%" id="btnIn">دخول</button>
+    <button style="width:100%;margin-top:8px" id="btnUp">إنشاء حساب</button>
+    <div id="loginMsg" class="msg hide"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appView" class="hide">
+<header>
+  <div style="display:flex;align-items:center;gap:12px"><div class="logo">TITAN</div><span id="bridgePill" class="pill wn"><span class="dot"></span><span id="bridgeTxt">...</span></span></div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <select id="connSel" style="width:auto;min-width:180px"></select>
+    <button id="btnSetup">إعداد الجسر</button>
+    <button id="btnOut">خروج</button>
+  </div>
+</header>
+
+<div id="emergBanner" class="panel emerg hide" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+  <b>⛔ إيقاف الطوارئ مفعّل — لا يتم تنفيذ أي أوامر جديدة</b><button id="btnEmergOff">رفع الإيقاف</button>
+</div>
+
+<div class="grid g4" style="margin-bottom:12px">
+  <div class="panel stat"><h3>الرصيد</h3><div class="v num" id="sBal">—</div></div>
+  <div class="panel stat"><h3>الأسهم (Equity)</h3><div class="v num" id="sEq">—</div></div>
+  <div class="panel stat"><h3>ربح/خسارة اليوم</h3><div class="v num" id="sDay">—</div></div>
+  <div class="panel stat"><h3>الحساب</h3><div class="v" style="font-size:15px" id="sAcc">—</div><div style="color:var(--mut);font-size:12px" id="sSrv"></div></div>
+</div>
+
+<div class="grid g2">
+  <div class="panel">
+    <h3>الشارت</h3>
+    <div class="tabs" id="symTabs"></div>
+    <canvas id="chart"></canvas>
+    <div style="color:var(--mut);font-size:12px;margin-top:6px" id="chartInfo"></div>
+  </div>
+
+  <div style="display:grid;gap:12px;align-content:start">
+    <div class="panel">
+      <h3>الأسعار الحية من MT5</h3>
+      <div class="scroll"><table><thead><tr><th>الرمز</th><th>Bid</th><th>Ask</th><th>سبريد</th><th>العمر</th></tr></thead><tbody id="quotesBody"></tbody></table></div>
+    </div>
+    <div class="panel">
+      <h3>تذكرة أمر — <span id="tSym" class="num">—</span></h3>
+      <div class="row">
+        <div><label>وقف الخسارة (SL)</label><input id="oSL" type="number" step="any" dir="ltr"></div>
+        <div><label>جني الأرباح (TP)</label><input id="oTP" type="number" step="any" dir="ltr"></div>
+      </div>
+      <div class="row" style="margin-top:8px"><button class="buy" id="btnBuy">شراء</button><button class="sell" id="btnSell">بيع</button></div>
+      <div id="riskOut" class="msg">اختر رمزاً وأدخل SL و TP لمعاينة المخاطرة والحجم.</div>
+      <div style="color:var(--mut);font-size:12px;margin-top:6px">الحجم يُحسب تلقائياً من نسبة المخاطرة في إعداداتك (حد أقصى 1%).</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid g2" style="margin-top:12px">
+  <div class="panel">
+    <h3>الصفقات المفتوحة <span id="posCount"></span></h3>
+    <div class="scroll"><table><thead><tr><th>التذكرة</th><th>الرمز</th><th>النوع</th><th>الحجم</th><th>سعر الدخول</th><th>الربح</th><th></th></tr></thead><tbody id="posBody"></tbody></table></div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="danger" id="btnEmerg">⛔ إيقاف طوارئ + إغلاق الكل</button>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>سجل الأوامر</h3>
+    <div class="scroll"><table><thead><tr><th>الوقت</th><th>الأمر</th><th>الرمز</th><th>الحجم</th><th>الحالة</th></tr></thead><tbody id="ordBody"></tbody></table></div>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:12px">
+  <h3>الإعدادات والمخاطر</h3>
+  <div class="grid g4" id="prefsBox"></div>
+  <div style="margin-top:10px"><button id="btnSavePrefs">حفظ الإعدادات</button> <span id="prefsMsg" style="color:var(--mut);font-size:12px"></span></div>
+</div>
+
+<!-- SETUP -->
+<div class="panel hide" id="setupPanel" style="margin-top:12px">
+  <h3>ربط MetaTrader 5</h3>
+  <div class="row">
+    <div><label>اسم الاتصال</label><input id="newLabel" value="MT5 Demo"></div>
+    <div style="align-self:end"><button class="pri" id="btnNewConn" style="width:100%">إنشاء اتصال + رمز جسر جديد</button></div>
+  </div>
+  <div id="tokenOut" class="msg hide"></div>
+  <div class="msg">
+    <b>خطوات التشغيل:</b>
+    <ol>
+      <li>انسخ <code>TitanBridge.mq5</code> إلى <code>MQL5/Experts</code> (من MT5: ملف ← فتح مجلد البيانات) ثم Compile في MetaEditor.</li>
+      <li>في MT5: أدوات ← خيارات ← Expert Advisors ← فعّل <b>Allow WebRequest</b> وأضف رابط التطبيق المنشور (نفس قيمة <code>AppUrl</code>).</li>
+      <li>اسحب الـ EA على أي شارت، وضع <code>AppUrl</code> و <code>BridgeToken</code> من الأعلى، وفعّل زر Algo Trading.</li>
+      <li>خلال ~3 ثوانٍ تتحول الحالة في الأعلى إلى <b>متصل</b> وتظهر الأسعار والرصيد.</li>
+    </ol>
+  </div>
+  <div class="msg" id="diag"></div>
+</div>
+
+</div><!-- /app -->
+</div>
+
+<script>
+const SUPABASE_URL="https://c--c44dfd6e-8775-4495-85dc-3fe9738a0e5e-prod.lovable.cloud", SUPABASE_KEY="sb_publishable_S-UJHAow3ZoMSxvB9LWfCA_3bSI9CgQ";
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
+const $=id=>document.getElementById(id);
+const fmt=(v,d=2)=>v==null||isNaN(v)?"—":Number(v).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const HEARTBEAT_MAX=60000, RISK_CAP=1;
+
+/* ---------- risk engine (نفس منطق src/lib/risk.ts) ---------- */
+const LABELS={EMERGENCY_STOP:"إيقاف الطوارئ مفعّل",ANALYSIS_MODE:"وضع التحليل فقط (غيّر وضع التنفيذ إلى demo)",LIVE_DISABLED:"التداول الحقيقي معطّل",NO_BROKER:"لا يوجد حساب وسيط",ACCOUNT_NOT_VERIFIED_DEMO:"الحساب غير مؤكد كتجريبي من الجسر",BRIDGE_UNHEALTHY:"الجسر غير سليم أو نبضه قديم",NO_QUOTE:"لا يوجد سعر",STALE_QUOTE:"السعر قديم",SPREAD_TOO_WIDE:"السبريد غير طبيعي",INVALID_STOP:"وقف الخسارة غير صالح",STOP_CALC_FAILED:"تعذّر حساب الحجم/الوقف",LOT_BELOW_MIN:"الحجم أقل من الحد الأدنى",RR_TOO_LOW:"نسبة العائد/المخاطرة منخفضة أو TP غير صالح",RISK_ABOVE_CAP:"المخاطرة تتجاوز 1%",NO_EQUITY:"لا توجد بيانات رصيد",DAILY_LOSS_BREACHED:"تم تجاوز الخسارة اليومية",TOTAL_DRAWDOWN_BREACHED:"تم تجاوز التراجع الكلي",MAX_POSITIONS:"الحد الأقصى للصفقات",CORRELATED_EXPOSURE:"تعرض مترابط مرتفع",LOSS_STREAK_PAUSE:"إيقاف بعد خسائر متتالية",BROKER_RULES_UNKNOWN:"قواعد الشركة غير مهيأة"};
+function legs(s){const c=s.replace(/[^A-Z]/gi,"").toUpperCase();return [c.slice(0,3),c.slice(3,6)].filter(Boolean)}
+function correlated(sym,open){const m=legs(sym);return open.filter(o=>legs(o).some(l=>m.includes(l))).length}
+function calcVolume(a){const dist=Math.abs(a.entry-a.stop);if(!(dist>0)||!(a.tickSize>0)||!(a.tickValue>0)||!(a.lotStep>0)||!(a.equity>0))return null;
+ const risk=a.equity*Math.min(a.riskPct,RISK_CAP)/100;const raw=risk/((dist/a.tickSize)*a.tickValue);
+ const st=Math.floor(raw/a.lotStep+1e-9)*a.lotStep;const vol=Math.min(Number(st.toFixed(8)),a.maxLot);return vol<a.minLot?{volume:0,riskAmount:risk}:{volume:vol,riskAmount:risk}}
+function evaluate(o,c){const r=[],p=c.prefs,out={ok:false,reasons:r,volume:null,riskAmount:null,rr:null,spread:null,entry:null};
+ if(p.emergency_stop)r.push("EMERGENCY_STOP");
+ if(o.mode==="live"){if(p.execution_mode!=="live")r.push("LIVE_DISABLED")}else if(p.execution_mode==="analysis")r.push("ANALYSIS_MODE");
+ if(p.risk_per_trade_pct>RISK_CAP||p.risk_per_trade_pct<=0)r.push("RISK_ABOVE_CAP");
+ const b=c.broker;
+ if(!b)r.push("NO_BROKER");else{
+  if(o.mode==="demo"&&b.verified_account_type!=="demo")r.push("ACCOUNT_NOT_VERIFIED_DEMO");
+  const age=b.last_heartbeat_at?c.now-new Date(b.last_heartbeat_at).getTime():Infinity;
+  if(b.bridge_status!=="healthy"||age>HEARTBEAT_MAX)r.push("BRIDGE_UNHEALTHY");
+  if(b.verified_account_type==="prop")r.push("BROKER_RULES_UNKNOWN");
+  if(!(Number(b.equity)>0))r.push("NO_EQUITY")}
+ if(c.dailyLossPct>=p.max_daily_drawdown_pct)r.push("DAILY_LOSS_BREACHED");
+ if(c.ddPct>=p.max_total_drawdown_pct)r.push("TOTAL_DRAWDOWN_BREACHED");
+ if(c.openPositions>=p.max_open_positions)r.push("MAX_POSITIONS");
+ if(c.corr>=p.max_correlated_positions)r.push("CORRELATED_EXPOSURE");
+ if(c.losses>=p.consecutive_loss_pause)r.push("LOSS_STREAK_PAUSE");
+ const q=c.quote;
+ if(!q)r.push("NO_QUOTE");else{
+  const age=c.now-new Date(q.quoted_at).getTime();if(!(age>=0)||age>p.max_quote_age_seconds*1000)r.push("STALE_QUOTE");
+  const sp=q.point>0?Math.round((q.ask-q.bid)/q.point):null;out.spread=sp;if(sp==null||sp<0||sp>p.max_spread_points)r.push("SPREAD_TOO_WIDE");
+  const entry=o.side==="buy"?q.ask:q.bid;out.entry=entry;
+  const vs=o.side==="buy"?o.sl<entry:o.sl>entry;if(!vs)r.push("INVALID_STOP");
+  if(o.tp!=null){const rr=Math.abs(o.tp-entry)/Math.abs(entry-o.sl);const vt=o.side==="buy"?o.tp>entry:o.tp<entry;out.rr=isFinite(rr)?Number(rr.toFixed(2)):null;if(!vt||!(rr>=p.min_reward_risk))r.push("RR_TOO_LOW")}else r.push("RR_TOO_LOW");
+  if(vs&&b&&b.equity&&q.tick_size&&q.tick_value&&q.min_lot&&q.lot_step&&q.max_lot){
+   const v=calcVolume({equity:Number(b.equity),riskPct:p.risk_per_trade_pct,entry,stop:o.sl,tickSize:q.tick_size,tickValue:q.tick_value,minLot:q.min_lot,lotStep:q.lot_step,maxLot:q.max_lot});
+   if(!v)r.push("STOP_CALC_FAILED");else{out.riskAmount=v.riskAmount;out.volume=v.volume;if(v.volume<=0)r.push("LOT_BELOW_MIN")}}
+  else if(vs)r.push("STOP_CALC_FAILED")}
+ out.reasons=[...new Set(r)];out.ok=out.reasons.length===0;return out}
+
+/* ---------- state ---------- */
+const S={user:null,conns:[],connId:null,conn:null,quotes:[],positions:[],orders:[],candles:[],prefs:null,sym:null,tf:null,timer:null};
+const sha256=async t=>[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,"0")).join("");
+const newToken=()=>{const b=new Uint8Array(24);crypto.getRandomValues(b);return "ttn_"+[...b].map(x=>x.toString(16).padStart(2,"0")).join("")};
+
+/* ---------- auth ---------- */
+function loginMsg(t,cls){const m=$("loginMsg");m.textContent=t;m.className="msg "+(cls||"err")}
+$("btnIn").onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("pw").value});if(error)loginMsg(error.message)};
+$("btnUp").onclick=async()=>{const {data,error}=await sb.auth.signUp({email:$("email").value.trim(),password:$("pw").value});if(error)return loginMsg(error.message);if(!data.session)loginMsg("تفقد بريدك لتأكيد الحساب","good")};
+$("btnOut").onclick=()=>sb.auth.signOut();
+sb.auth.onAuthStateChange((_e,s)=>{S.user=s?.user??null;route()});
+async function route(){
+ const {data}=await sb.auth.getSession();S.user=data.session?.user??null;
+ $("loginView").classList.toggle("hide",!!S.user);$("appView").classList.toggle("hide",!S.user);
+ clearInterval(S.timer);if(S.user){await loadConns();await loadPrefs();tick();S.timer=setInterval(tick,3000)}}
+
+/* ---------- data ---------- */
+async function loadConns(){
+ const {data}=await sb.from("broker_connections").select("*").order("created_at");S.conns=data||[];
+ if(!S.connId||!S.conns.find(c=>c.id===S.connId))S.connId=S.conns[0]?.id??null;
+ $("connSel").innerHTML=S.conns.map(c=>`<option value="${c.id}" ${c.id===S.connId?"selected":""}>${esc(c.label)}</option>`).join("")||"<option>لا يوجد اتصال</option>";
+ if(!S.conns.length)$("setupPanel").classList.remove("hide")}
+$("connSel").onchange=e=>{S.connId=e.target.value;S.sym=null;tick()};
+async function loadPrefs(){
+ let {data}=await sb.from("user_preferences").select("*").eq("user_id",S.user.id).maybeSingle();
+ S.prefs=data;renderPrefs()}
+async function tick(){
+ if(!S.connId){renderStatus();return}
+ const id=S.connId;
+ const [c,q,p,o]=await Promise.all([
+  sb.from("broker_connections").select("*").eq("id",id).maybeSingle(),
+  sb.from("market_snapshots").select("*").eq("broker_connection_id",id).order("symbol"),
+  sb.from("bridge_positions").select("*").eq("broker_connection_id",id).order("ticket"),
+  sb.from("orders").select("*").eq("broker_connection_id",id).order("created_at",{ascending:false}).limit(15)]);
+ S.conn=c.data;S.quotes=q.data||[];S.positions=p.data||[];S.orders=o.data||[];
+ const {data:pr}=await sb.from("user_preferences").select("emergency_stop").eq("user_id",S.user.id).maybeSingle();
+ if(S.prefs&&pr)S.prefs.emergency_stop=pr.emergency_stop;
+ if(!S.sym||!S.quotes.find(x=>x.symbol===S.sym))S.sym=S.quotes[0]?.symbol??null;
+ if(S.sym){const {data:cd}=await sb.from("candles").select("t,o,h,l,c,timeframe").eq("broker_connection_id",id).eq("symbol",S.sym).order("t",{ascending:false}).limit(150);
+  S.candles=(cd||[]).reverse();S.tf=S.candles.at(-1)?.timeframe??null}else S.candles=[];
+ render()}
+
+/* ---------- render ---------- */
+function bridgeState(){const c=S.conn;if(!c)return{k:"wn",t:"لا يوجد اتصال",age:null};
+ const age=c.last_heartbeat_at?Date.now()-new Date(c.last_heartbeat_at).getTime():null;
+ if(age==null)return{k:"wn",t:"بانتظار أول نبضة من MT5",age};
+ if(c.bridge_status==="healthy"&&age<=HEARTBEAT_MAX)return{k:"ok",t:`متصل بـ MT5 — آخر نبضة قبل ${Math.round(age/1000)}ث`,age};
+ return{k:"bad",t:`الجسر متوقف — آخر نبضة قبل ${age>3600000?Math.round(age/3600000)+" ساعة":Math.round(age/1000)+"ث"}`,age}}
+function renderStatus(){const b=bridgeState();$("bridgePill").className="pill "+b.k;$("bridgeTxt").textContent=b.t}
+function render(){
+ renderStatus();const c=S.conn||{};const cur=c.currency||"";
+ $("sBal").textContent=fmt(c.balance)+" "+cur;$("sEq").textContent=fmt(c.equity)+" "+cur;
+ const day=c.equity!=null&&c.day_start_equity!=null?c.equity-c.day_start_equity:null;
+ $("sDay").textContent=day==null?"—":(day>=0?"+":"")+fmt(day);$("sDay").className="v num "+(day>0?"up":day<0?"dn":"");
+ $("sAcc").textContent=c.account_login?`#${c.account_login} · ${({demo:"تجريبي",live:"حقيقي",prop:"Prop"})[c.verified_account_type]||"—"}`:"—";
+ $("sSrv").textContent=[c.broker_name,c.server_name].filter(Boolean).join(" · ");
+ const em=!!S.prefs?.emergency_stop;$("emergBanner").classList.toggle("hide",!em);
+ $("quotesBody").innerHTML=S.quotes.map(q=>{const sp=q.point>0?Math.round((q.ask-q.bid)/q.point):"—";const age=Math.max(0,Math.round((Date.now()-new Date(q.quoted_at))/1000));const d=q.digits??5;
+  return `<tr class="clk ${q.symbol===S.sym?"sel":""}" data-sym="${esc(q.symbol)}"><td><b>${esc(q.symbol)}</b></td><td class="num">${fmt(q.bid,d)}</td><td class="num">${fmt(q.ask,d)}</td><td class="num">${sp}</td><td class="num ${age>20?"dn":""}">${age}s</td></tr>`}).join("")||`<tr><td colspan="5" style="color:var(--mut)">لا توجد أسعار بعد — شغّل TitanBridge في MT5</td></tr>`;
+ document.querySelectorAll("#quotesBody tr[data-sym]").forEach(r=>r.onclick=()=>{S.sym=r.dataset.sym;tick()});
+ $("symTabs").innerHTML=S.quotes.map(q=>`<button class="${q.symbol===S.sym?"on":""}" data-sym="${esc(q.symbol)}">${esc(q.symbol)}</button>`).join("");
+ document.querySelectorAll("#symTabs button").forEach(b=>b.onclick=()=>{S.sym=b.dataset.sym;tick()});
+ $("tSym").textContent=S.sym||"—";
+ $("posCount").textContent=S.positions.length?`(${S.positions.length})`:"";
+ $("posBody").innerHTML=S.positions.map(p=>`<tr><td class="num">${esc(p.ticket)}</td><td>${esc(p.symbol)}</td><td class="${p.side==="buy"?"up":"dn"}">${p.side==="buy"?"شراء":"بيع"}</td><td class="num">${fmt(p.volume)}</td><td class="num">${fmt(p.open_price,5)}</td><td class="num ${p.profit>=0?"up":"dn"}">${fmt(p.profit)}</td><td><button data-close="${esc(p.ticket)}">إغلاق</button></td></tr>`).join("")||`<tr><td colspan="7" style="color:var(--mut)">لا توجد صفقات مفتوحة</td></tr>`;
+ document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closePos(b.dataset.close));
+ const stC={pending:"wn",sent:"wn",filled:"ok",closed:"ok",rejected:"bad"},stT={pending:"بالانتظار",sent:"أُرسل لـ MT5",filled:"نُفّذ",closed:"أُغلق",rejected:"مرفوض"};
+ $("ordBody").innerHTML=S.orders.map(o=>`<tr><td class="num">${new Date(o.created_at).toLocaleTimeString("en-GB")}</td><td>${o.action==="close"?"إغلاق":(o.side==="buy"?"شراء":"بيع")}</td><td>${esc(o.symbol)}</td><td class="num">${o.volume??"—"}</td><td><span class="pill ${stC[o.status]||""}" title="${esc(o.reject_reason||"")}"><span class="dot"></span>${stT[o.status]||esc(o.status)}</span>${o.reject_reason?`<div style="color:#ff9aa8;font-size:11px">${esc(o.reject_reason)}</div>`:""}</td></tr>`).join("")||`<tr><td colspan="5" style="color:var(--mut)">لا توجد أوامر</td></tr>`;
+ drawChart();previewRisk();renderDiag()}
+
+function drawChart(){
+ const cv=$("chart"),dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;
+ const g=cv.getContext("2d");g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+ const cs=S.candles;if(!cs.length){g.fillStyle="#8b909c";g.font="14px sans-serif";g.textAlign="center";g.fillText("لا توجد شموع بعد — يرسلها الجسر كل ~30 ثانية",W/2,H/2);$("chartInfo").textContent="";return}
+ const padR=62,padB=18,w=W-padR,h=H-padB;let hi=-Infinity,lo=Infinity;cs.forEach(c=>{hi=Math.max(hi,c.h);lo=Math.min(lo,c.l)});const rg=(hi-lo)||1;hi+=rg*.05;lo-=rg*.05;
+ const y=v=>h-(v-lo)/(hi-lo)*h,bw=w/cs.length;
+ g.strokeStyle="#20232b";g.fillStyle="#8b909c";g.font="11px monospace";g.textAlign="left";
+ for(let i=0;i<=5;i++){const v=lo+(hi-lo)*i/5,yy=y(v);g.beginPath();g.moveTo(0,yy);g.lineTo(w,yy);g.stroke();g.fillText(v.toFixed(5).replace(/0+$/,"").replace(/\.$/,""),w+4,yy+4)}
+ cs.forEach((c,i)=>{const x=i*bw+bw/2,up=c.c>=c.o;g.strokeStyle=g.fillStyle=up?"#26a269":"#e0475b";
+  g.beginPath();g.moveTo(x,y(c.h));g.lineTo(x,y(c.l));g.stroke();const t=y(Math.max(c.o,c.c)),b=y(Math.min(c.o,c.c));g.fillRect(x-bw*.35,t,bw*.7,Math.max(1,b-t))});
+ const q=S.quotes.find(x=>x.symbol===S.sym);if(q){const yy=y(q.bid);g.strokeStyle="#d9a93a";g.setLineDash([4,3]);g.beginPath();g.moveTo(0,yy);g.lineTo(w,yy);g.stroke();g.setLineDash([])}
+ const last=cs.at(-1);$("chartInfo").textContent=`${S.sym} · ${S.tf||""} · ${cs.length} شمعة · آخر شمعة ${new Date(last.t).toLocaleString("en-GB")}`}
+
+/* ---------- order ticket ---------- */
+function orderCtx(){
+ const c=S.conn,eq=Number(c?.equity||0),ds=Number(c?.day_start_equity||0),pk=Number(c?.peak_equity||0);
+ return{now:Date.now(),prefs:S.prefs,broker:c,quote:S.quotes.find(q=>q.symbol===S.sym)||null,openPositions:S.positions.length,
+  corr:correlated(S.sym||"",S.positions.map(p=>p.symbol)),dailyLossPct:ds>0?Math.max(0,(ds-eq)/ds*100):0,ddPct:pk>0?Math.max(0,(pk-eq)/pk*100):0,losses:0}}
+function mode(){return S.conn?.verified_account_type==="demo"?"demo":"live"}
+function evalSide(side){const sl=parseFloat($("oSL").value),tp=$("oTP").value===""?null:parseFloat($("oTP").value);
+ if(!S.prefs||!S.sym||!isFinite(sl))return null;return evaluate({side,sl,tp,mode:mode()},orderCtx())}
+function previewRisk(){
+ const box=$("riskOut");if(!S.sym||!S.prefs){box.textContent="اختر رمزاً وأدخل SL و TP لمعاينة المخاطرة والحجم.";box.className="msg";return}
+ const sl=parseFloat($("oSL").value);if(!isFinite(sl)){box.textContent="أدخل وقف الخسارة (SL) و TP لمعاينة المخاطرة.";box.className="msg";return}
+ const q=S.quotes.find(x=>x.symbol===S.sym);const side=q&&sl<q.bid?"buy":"sell";const d=evalSide(side);if(!d)return;
+ const hdr=`معاينة (${side==="buy"?"شراء":"بيع"}): `+(d.volume!=null?`الحجم <b class="num">${d.volume}</b> · مخاطرة <b class="num">${fmt(d.riskAmount)}</b> · R:R <b class="num">${d.rr??"—"}</b> · سبريد <b class="num">${d.spread??"—"}</b>`:"");
+ box.className="msg "+(d.ok?"good":"err");box.innerHTML=d.ok?hdr+" ✅ مسموح":hdr+"<br>"+d.reasons.map(r=>"⛔ "+(LABELS[r]||r)).join("<br>")}
+["oSL","oTP"].forEach(i=>$(i).addEventListener("input",previewRisk));
+async function place(side){
+ const sl=parseFloat($("oSL").value),tp=$("oTP").value===""?null:parseFloat($("oTP").value);
+ const d=evalSide(side);if(!d)return alert("أدخل وقف الخسارة");
+ if(!d.ok){previewRisk();return alert("تم رفض الأمر:\n"+d.reasons.map(r=>LABELS[r]||r).join("\n"))}
+ if(mode()==="live"&&!confirm(`حساب حقيقي! ${side==="buy"?"شراء":"بيع"} ${d.volume} لوت ${S.sym}؟`))return;
+ const row={user_id:S.user.id,broker_connection_id:S.connId,action:"open",symbol:S.sym,side,volume:d.volume,entry_price:d.entry,stop_loss:sl,take_profit:tp,mode:mode(),risk_summary:d};
+ const {error}=await sb.from("orders").insert(row);
+ if(error)return alert("تعذّر إرسال الأمر: "+error.message+"\n\nإن كانت سياسة الأمان (RLS) تمنع الإدراج من المتصفح، أرسل الأوامر عبر خادم التطبيق (placeOrder).");
+ $("riskOut").className="msg good";$("riskOut").textContent="تم وضع الأمر في الطابور — سيلتقطه الجسر في المزامنة القادمة (≤3ث).";tick()}
+$("btnBuy").onclick=()=>place("buy");$("btnSell").onclick=()=>place("sell");
+async function queueClose(list){
+ if(!list.length)return 0;const m=mode();
+ const {error}=await sb.from("orders").insert(list.map(p=>({user_id:S.user.id,broker_connection_id:S.connId,action:"close",ticket:p.ticket,symbol:p.symbol,mode:m})));
+ if(error){alert("تعذّر طلب الإغلاق: "+error.message);return 0}return list.length}
+async function closePos(t){const p=S.positions.find(x=>x.ticket===t);if(p&&confirm("إغلاق الصفقة "+t+"؟")){await queueClose([p]);tick()}}
+async function setEmerg(on,closeAll){
+ const {error}=await sb.from("user_preferences").update({emergency_stop:on,emergency_stop_at:on?new Date().toISOString():null}).eq("user_id",S.user.id);
+ if(error)return alert("تعذّر تحديث إيقاف الطوارئ: "+error.message);
+ if(on&&closeAll)await queueClose(S.positions);
+ await loadPrefs();tick()}
+$("btnEmerg").onclick=()=>{if(confirm("تفعيل إيقاف الطوارئ وإغلاق كل الصفقات؟"))setEmerg(true,true)};
+$("btnEmergOff").onclick=()=>setEmerg(false,false);
+
+/* ---------- prefs ---------- */
+const PREF_FIELDS=[["execution_mode","وضع التنفيذ","sel"],["risk_per_trade_pct","المخاطرة لكل صفقة %"],["max_daily_drawdown_pct","حد الخسارة اليومية %"],["max_total_drawdown_pct","حد التراجع الكلي %"],["max_open_positions","أقصى صفقات"],["max_spread_points","أقصى سبريد (نقاط)"],["min_reward_risk","أدنى R:R"],["max_correlated_positions","أقصى مترابطة"],["consecutive_loss_pause","إيقاف بعد خسائر"],["max_quote_age_seconds","أقصى عمر للسعر (ث)"]];
+function renderPrefs(){if(!S.prefs){$("prefsBox").innerHTML='<div style="color:var(--mut)">لا توجد إعدادات للمستخدم بعد.</div>';return}
+ $("prefsBox").innerHTML=PREF_FIELDS.map(([k,l,t])=>t==="sel"?`<div><label>${l}</label><select id="pf_${k}">${["analysis","demo","live"].map(v=>`<option ${S.prefs[k]===v?"selected":""}>${v}</option>`).join("")}</select></div>`:`<div><label>${l}</label><input id="pf_${k}" type="number" step="any" dir="ltr" value="${S.prefs[k]}"></div>`).join("")}
+$("btnSavePrefs").onclick=async()=>{if(!S.prefs)return;const up={};
+ for(const [k,,t] of PREF_FIELDS){const v=$("pf_"+k).value;up[k]=t==="sel"?v:Number(v)}
+ if(up.risk_per_trade_pct>RISK_CAP||up.risk_per_trade_pct<=0)return $("prefsMsg").textContent="المخاطرة يجب أن تكون بين 0 و 1%";
+ const {error}=await sb.from("user_preferences").update(up).eq("user_id",S.user.id);
+ $("prefsMsg").textContent=error?"فشل: "+error.message:"تم الحفظ ✓";if(!error)loadPrefs()};
+
+/* ---------- bridge setup ---------- */
+$("btnSetup").onclick=()=>$("setupPanel").classList.toggle("hide");
+$("btnNewConn").onclick=async()=>{
+ const label=$("newLabel").value.trim()||"MT5";const token=newToken();
+ const {data,error}=await sb.from("broker_connections").insert({user_id:S.user.id,label,bridge_token_hash:await sha256(token)}).select("id").single();
+ const o=$("tokenOut");o.classList.remove("hide");
+ if(error){o.className="msg err";o.innerHTML="تعذّر إنشاء الاتصال من المتصفح: "+esc(error.message)+"<br>أنشئ الاتصال من تطبيق Lovable (createBridgeConnection) ثم افتح هذه الصفحة.";return}
+ o.className="msg good";o.innerHTML=`<b>انسخ هذا الرمز الآن — لن يظهر مرة أخرى:</b><pre>${token}</pre>ضعه في حقل <code>BridgeToken</code> في الـ EA.`;
+ S.connId=data.id;await loadConns();tick()};
+function renderDiag(){
+ const b=bridgeState(),c=S.conn,items=[
+  [!!c,"اتصال محفوظ في قاعدة البيانات"],
+  [c&&c.last_heartbeat_at!=null,"استلمنا نبضة واحدة على الأقل من MT5"],
+  [b.k==="ok","النبضة حديثة (أقل من 60 ثانية)"],
+  [S.quotes.length>0,"أسعار واردة ("+S.quotes.length+" رمز)"],
+  [S.candles.length>0,"شموع واردة للرمز المحدد"],
+  [c?.verified_account_type!=null,"نوع الحساب تحقق منه الجسر: "+(c?.verified_account_type||"—")]];
+ $("diag").innerHTML="<b>فحص الاتصال:</b><div class='checks'>"+items.map(([ok,t])=>`<div>${ok?"✅":"⬜"} ${t}</div>`).join("")+"</div>"+(b.k!=="ok"?"<div style='margin-top:6px;color:var(--mut)'>إن لم تصل نبضة: تأكد من Algo Trading، رابط WebRequest، وأن BridgeToken صحيح (سجل Experts في MT5 يعرض السبب).</div>":"")}
+
+addEventListener("resize",()=>S.user&&drawChart());
+setInterval(()=>S.user&&renderStatus(),1000);
+route();
+</script>
+</body>
+</html>
